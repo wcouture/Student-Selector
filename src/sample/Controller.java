@@ -30,6 +30,9 @@ public class Controller {
     public static boolean quit = false;
     @FXML public Label selectedStudent;
 
+    /*
+        Loads a text file or spreadsheet to be read for a student list.
+     */
     @FXML
     private void openFile() throws IOException, InvalidFormatException {
         FileChooser fileChooser = new FileChooser();
@@ -40,12 +43,19 @@ public class Controller {
         setStudentList(file);
     }
 
+    /*
+        Changes whether a name can repeat before all names have been chosen.
+     */
     @FXML private void setRepeatPermission(){
         System.out.println("switching repeat permission");
         repeats = !repeats;
         resetStats();
     }
 
+    /*
+        Creates the student list from the selected file
+        @param - the selected file
+     */
     public void setStudentList(File file) throws IOException, InvalidFormatException {
         String fileName = file.getName();
         String fileExtension = fileName.substring(fileName.indexOf('.'));
@@ -95,6 +105,9 @@ public class Controller {
 
     }
 
+    /*
+        Resets the selection statistics
+     */
     @FXML
     private void resetStats(){
         try {
@@ -105,6 +118,9 @@ public class Controller {
         }
     }
 
+    /*
+        Selects the next student from the list.
+     */
     @FXML private void next() throws MalformedURLException {
         int student;
         int small = findSmall();
@@ -123,6 +139,9 @@ public class Controller {
 
     }
 
+    /*
+        Finds the student with the smallest frequency and returns the value.
+     */
     public int findSmall(){
         int small = studentFrequency[0];
         for(int i = 1;i < studentFrequency.length;i++){
@@ -132,11 +151,17 @@ public class Controller {
         return small;
     }
 
+    /*
+        Closes the program.
+     */
     @FXML
     private void quit(){
         quit = true;
     }
 
+    /*
+        Sets the display to the selected student
+     */
     public String setString(){
         String studentStats = "";
         try {
@@ -148,7 +173,9 @@ public class Controller {
         return studentStats;
     }
 
-
+    /*
+        Displays the selection statistics in a seperate window
+     */
     @FXML
     private void showStats(){
         String studentStats = setString();
